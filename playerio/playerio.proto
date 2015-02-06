@@ -1,0 +1,700 @@
+
+
+message ValueObject {
+    optional enum valueType = 1;
+    optional string string = 2;
+    optional int32 int32 = 3;
+    optional uint32 uInt = 4;
+    optional int64 long = 5;
+    optional bool bool = 6;
+    optional float float = 7;
+    optional double double = 8;
+    optional bytes byteArray = 9;
+    optional int64 dateTime = 10;
+    repeated ArrayProperty arrayProperties = 11;
+    repeated ObjectProperty objectProperties = 12;
+}
+
+message ObjectProperty {
+    optional string name = 1;
+    optional ValueObject value = 2;
+}
+
+message ArrayProperty {
+    optional int32 index = 1;
+    optional ValueObject value = 2;
+}
+
+message BigDBChangeset {
+    optional string table = 1;
+    optional string key = 2;
+    optional string onlyIfVersion = 3;
+    repeated ObjectProperty changes = 4;
+    optional bool fullOverwrite = 5;
+}
+
+
+message BigDBObject {
+    optional string key = 1;
+    optional string version = 2;
+    repeated ObjectProperty properties = 3;
+    optional uint32 creator = 4;
+}
+
+message BigDBObjectId {
+    optional string table = 1;
+    repeated string keys = 2;
+}
+
+message ConnectArgs {
+    optional string gameId = 1;
+    optional string connectionId = 2;
+    optional string userId = 3;
+    optional string auth = 4;
+    optional string partnerId = 5;
+    repeated string playerInsightSegments = 6;
+    optional string clientAPI = 7;
+    repeated KeyValuePair clientInfo = 8;
+}
+
+message ConnectError {
+    optional int32 errorCode = 1;
+    optional string message = 2;
+}
+
+message ConnectOutput {
+    optional string token = 1;
+    optional string userId = 2;
+    optional bool showBranding = 3;
+    optional string gameFSRedirectMap = 4;
+    optional string partnerId = 5;
+    optional PlayerInsightState playerInsightState = 6;
+}
+
+message CreateJoinRoomArgs {
+    optional string roomId = 1;
+    optional string roomType = 2;
+    optional bool visible = 3;
+    repeated KeyValuePair roomData = 4;
+    repeated KeyValuePair joinData = 5;
+    optional bool isDevRoom = 6;
+}
+
+message CreateJoinRoomError {
+    optional int32 errorCode = 1;
+    optional string message = 2;
+}
+
+message CreateJoinRoomOutput {
+    optional string roomId = 1;
+    optional string joinKey = 2;
+    repeated ServerEndpoint endpoints = 3;
+}
+
+message CreateObjectsArgs {
+    repeated NewBigDBObject objects = 1;
+    optional bool loadExisting = 2;
+}
+
+message CreateObjectsError {
+    optional int32 errorCode = 1;
+    optional string message = 2;
+}
+
+message CreateObjectsOutput {
+    repeated BigDBObject objects = 1;
+}
+
+message CreateRoomArgs {
+    optional string roomId = 1;
+    optional string roomType = 2;
+    optional bool visible = 3;
+    repeated KeyValuePair roomData = 4;
+    optional bool isDevRoom = 5;
+}
+
+message CreateRoomError {
+    optional int32 errorCode = 1;
+    optional string message = 2;
+}
+
+message CreateRoomOutput {
+    optional string roomId = 1;
+}
+
+message DeleteIndexRangeArgs {
+    optional string table = 1;
+    optional string index = 2;
+    repeated ValueObject startIndexValue = 3;
+    repeated ValueObject stopIndexValue = 4;
+}
+
+message DeleteIndexRangeError {
+    optional int32 errorCode = 1;
+    optional string message = 2;
+}
+
+message DeleteIndexRangeOutput {
+}
+
+message DeleteObjectsArgs {
+    repeated BigDBObjectId objectIds = 1;
+}
+
+message DeleteObjectsError {
+    optional int32 errorCode = 1;
+    optional string message = 2;
+}
+
+message DeleteObjectsOutput {
+}
+
+message FacebookOAuthConnectArgs {
+    optional string gameId = 1;
+    optional string accessToken = 2;
+    optional string partnerId = 3;
+    repeated string playerInsightSegments = 4;
+    optional string clientAPI = 5;
+    repeated KeyValuePair clientInfo = 6;
+}
+
+message FacebookOAuthConnectError {
+    optional int32 errorCode = 1;
+    optional string message = 2;
+}
+
+message FacebookOAuthConnectOutput {
+    optional string token = 1;
+    optional string userId = 2;
+    optional bool showBranding = 3;
+    optional string gameFSRedirectMap = 4;
+    optional string facebookUserId = 5;
+    optional string partnerId = 6;
+    optional PlayerInsightState playerInsightState = 7;
+}
+
+message JoinRoomArgs {
+    optional string roomId = 1;
+    repeated KeyValuePair joinData = 2;
+    optional bool isDevRoom = 3;
+}
+
+message JoinRoomError {
+    optional int32 errorCode = 1;
+    optional string message = 2;
+}
+
+message JoinRoomOutput {
+    optional string joinKey = 1;
+    repeated ServerEndpoint endpoints = 2;
+}
+
+message KeyValuePair {
+    optional string key = 1;
+    optional string value = 2;
+}
+
+message KongregateConnectArgs {
+    optional string gameId = 1;
+    optional string userId = 2;
+    optional string gameAuthToken = 3;
+    repeated string playerInsightSegments = 4;
+    optional string clientAPI = 5;
+    repeated KeyValuePair clientInfo = 6;
+}
+
+message KongregateConnectError {
+    optional int32 errorCode = 1;
+    optional string message = 2;
+}
+
+message KongregateConnectOutput {
+    optional string token = 1;
+    optional string userId = 2;
+    optional bool showBranding = 3;
+    optional string gameFSRedirectMap = 4;
+    optional PlayerInsightState playerInsightState = 5;
+}
+
+message ListRoomsArgs {
+    optional string roomType = 1;
+    repeated KeyValuePair searchCriteria = 2;
+    optional int32 resultLimit = 3;
+    optional int32 resultOffset = 4;
+    optional bool onlyDevRooms = 5;
+}
+
+message ListRoomsError {
+    optional int32 errorCode = 1;
+    optional string message = 2;
+}
+
+message ListRoomsOutput {
+    repeated RoomInfo rooms = 1;
+}
+
+message LoadIndexRangeArgs {
+    optional string table = 1;
+    optional string index = 2;
+    repeated ValueObject startIndexValue = 3;
+    repeated ValueObject stopIndexValue = 4;
+    optional int32 limit = 5;
+}
+
+message LoadIndexRangeError {
+    optional int32 errorCode = 1;
+    optional string message = 2;
+}
+
+message LoadIndexRangeOutput {
+    repeated BigDBObject objects = 1;
+}
+
+message LoadMatchingObjectsArgs {
+    optional string table = 1;
+    optional string index = 2;
+    repeated ValueObject indexValue = 3;
+    optional int32 limit = 4;
+}
+
+message LoadMatchingObjectsError {
+    optional int32 errorCode = 1;
+    optional string message = 2;
+}
+
+message LoadMatchingObjectsOutput {
+    repeated BigDBObject objects = 1;
+}
+
+message LoadMyPlayerObjectArgs {
+}
+
+message LoadMyPlayerObjectError {
+    optional int32 errorCode = 1;
+    optional string message = 2;
+}
+
+message LoadMyPlayerObjectOutput {
+    optional BigDBObject playerObject = 1;
+}
+
+message LoadObjectsArgs {
+    repeated BigDBObjectId objectIds = 1;
+}
+
+message LoadObjectsError {
+    optional int32 errorCode = 1;
+    optional string message = 2;
+}
+
+message LoadObjectsOutput {
+    repeated BigDBObject objects = 1;
+}
+
+message NewBigDBObject {
+    optional string table = 1;
+    optional string key = 2;
+    repeated ObjectProperty properties = 3;
+}
+
+message PartnerPaySetTagArgs {
+    optional string partnerId = 1;
+}
+
+message PartnerPaySetTagError {
+    optional int32 errorCode = 1;
+    optional string message = 2;
+}
+
+message PartnerPaySetTagOutput {
+}
+
+message PartnerPayTriggerArgs {
+    optional string key = 1;
+    optional uint32 count = 2;
+}
+
+message PartnerPayTriggerError {
+    optional int32 errorCode = 1;
+    optional string message = 2;
+}
+
+message PartnerPayTriggerOutput {
+}
+
+message PayVaultBuyArgs {
+    repeated PayVaultBuyItemInfo items = 1;
+    optional bool storeItems = 2;
+}
+
+message PayVaultBuyError {
+    optional int32 errorCode = 1;
+    optional string message = 2;
+}
+
+message PayVaultBuyItemInfo {
+    optional string itemKey = 1;
+    repeated ObjectProperty payload = 2;
+}
+
+message PayVaultBuyOutput {
+    optional PayVaultContents vaultContents = 1;
+}
+
+message PayVaultConsumeArgs {
+    repeated string ids = 1;
+}
+
+message PayVaultConsumeError {
+    optional int32 errorCode = 1;
+    optional string message = 2;
+}
+
+message PayVaultConsumeOutput {
+    optional PayVaultContents vaultContents = 1;
+}
+
+message PayVaultContents {
+    optional string version = 1;
+    optional int32 coins = 2;
+    repeated PayVaultItem items = 3;
+}
+
+message PayVaultCreditArgs {
+    optional uint32 amount = 1;
+    optional string reason = 2;
+}
+
+message PayVaultCreditError {
+    optional int32 errorCode = 1;
+    optional string message = 2;
+}
+
+message PayVaultCreditOutput {
+    optional PayVaultContents vaultContents = 1;
+}
+
+message PayVaultDebitArgs {
+    optional uint32 amount = 1;
+    optional string reason = 2;
+}
+
+message PayVaultDebitError {
+    optional int32 errorCode = 1;
+    optional string message = 2;
+}
+
+message PayVaultDebitOutput {
+    optional PayVaultContents vaultContents = 1;
+}
+
+message PayVaultGiveArgs {
+    repeated PayVaultBuyItemInfo items = 1;
+}
+
+message PayVaultGiveError {
+    optional int32 errorCode = 1;
+    optional string message = 2;
+}
+
+message PayVaultGiveOutput {
+    optional PayVaultContents vaultContents = 1;
+}
+
+message PayVaultHistoryEntry {
+    optional int32 amount = 1;
+    optional string type = 2;
+    optional int64 timestamp = 3;
+    repeated string itemKeys = 4;
+    optional string reason = 5;
+    optional string providerTransactionId = 6;
+    optional string providerPrice = 7;
+}
+
+message PayVaultItem {
+    optional string id = 1;
+    optional string itemKey = 2;
+    optional int64 purchaseDate = 3;
+    repeated ObjectProperty properties = 4;
+}
+
+message PayVaultPaymentInfoArgs {
+    optional string provider = 1;
+    repeated KeyValuePair purchaseArguments = 2;
+    repeated PayVaultBuyItemInfo items = 3;
+}
+
+message PayVaultPaymentInfoError {
+    optional int32 errorCode = 1;
+    optional string message = 2;
+}
+
+message PayVaultPaymentInfoOutput {
+    repeated KeyValuePair providerArguments = 1;
+}
+
+message PayVaultReadHistoryArgs {
+    optional uint32 page = 1;
+    optional uint32 pageSize = 2;
+}
+
+message PayVaultReadHistoryError {
+    optional int32 errorCode = 1;
+    optional string message = 2;
+}
+
+message PayVaultReadHistoryOutput {
+    repeated PayVaultHistoryEntry entries = 1;
+}
+
+message PayVaultRefreshArgs {
+    optional string lastVersion = 1;
+}
+
+message PayVaultRefreshError {
+    optional int32 errorCode = 1;
+    optional string message = 2;
+}
+
+message PayVaultRefreshOutput {
+    optional PayVaultContents vaultContents = 1;
+}
+
+message PayVaultUsePaymentInfoArgs {
+    optional string provider = 1;
+    repeated KeyValuePair providerArguments = 2;
+}
+
+message PayVaultUsePaymentInfoError {
+    optional int32 errorCode = 1;
+    optional string message = 2;
+}
+
+message PayVaultUsePaymentInfoOutput {
+    repeated KeyValuePair providerResults = 1;
+    optional PayVaultContents vaultContents = 2;
+}
+
+message PlayerInsightEvent {
+    optional string eventType = 1;
+    optional int32 value = 2;
+}
+
+message PlayerInsightRefreshArgs {
+}
+
+message PlayerInsightRefreshError {
+    optional int32 errorCode = 1;
+    optional string message = 2;
+}
+
+message PlayerInsightRefreshOutput {
+    optional PlayerInsightState state = 1;
+}
+
+message PlayerInsightSetSegmentsArgs {
+    repeated string segments = 1;
+}
+
+message PlayerInsightSetSegmentsError {
+    optional int32 errorCode = 1;
+    optional string message = 2;
+}
+
+message PlayerInsightSetSegmentsOutput {
+    optional PlayerInsightState state = 1;
+}
+
+message PlayerInsightState {
+    optional int32 playersOnline = 1;
+    repeated KeyValuePair segments = 2;
+}
+
+message PlayerInsightTrackEventsArgs {
+    repeated PlayerInsightEvent events = 1;
+}
+
+message PlayerInsightTrackEventsError {
+    optional int32 errorCode = 1;
+    optional string message = 2;
+}
+
+message PlayerInsightTrackEventsOutput {
+}
+
+message PlayerInsightTrackExternalPaymentArgs {
+    optional string currency = 1;
+    optional int32 amount = 2;
+}
+
+message PlayerInsightTrackExternalPaymentError {
+    optional int32 errorCode = 1;
+    optional string message = 2;
+}
+
+message PlayerInsightTrackExternalPaymentOutput {
+}
+
+message PlayerInsightTrackInvitedByArgs {
+    optional string invitingUserId = 1;
+    optional string invitationChannel = 2;
+}
+
+message PlayerInsightTrackInvitedByError {
+    optional int32 errorCode = 1;
+    optional string message = 2;
+}
+
+message PlayerInsightTrackInvitedByOutput {
+}
+
+message RoomInfo {
+    optional string id = 1;
+    optional string roomType = 2;
+    optional int32 onlineUsers = 3;
+    repeated KeyValuePair roomData = 4;
+}
+
+message SaveObjectChangesArgs {
+    optional enum lockType = 1;
+    repeated BigDBChangeset changesets = 2;
+    optional bool createIfMissing = 3;
+}
+
+message SaveObjectChangesError {
+    optional int32 errorCode = 1;
+    optional string message = 2;
+}
+
+message SaveObjectChangesOutput {
+    repeated string versions = 1;
+}
+
+message ServerEndpoint {
+    optional string address = 1;
+    optional int32 port = 2;
+}
+
+message SimpleConnectArgs {
+    optional string gameId = 1;
+    optional string usernameOrEmail = 2;
+    optional string password = 3;
+    repeated string playerInsightSegments = 4;
+    optional string clientAPI = 5;
+    repeated KeyValuePair clientInfo = 6;
+}
+
+message SimpleConnectError {
+    optional int32 errorCode = 1;
+    optional string message = 2;
+}
+
+message SimpleConnectOutput {
+    optional string token = 1;
+    optional string userId = 2;
+    optional bool showBranding = 3;
+    optional string gameFSRedirectMap = 4;
+    optional string partnerId = 5;
+    optional PlayerInsightState playerInsightState = 6;
+}
+
+message SimpleGetCaptchaArgs {
+    optional string gameId = 1;
+    optional int32 width = 2;
+    optional int32 height = 3;
+}
+
+message SimpleGetCaptchaError {
+    optional int32 errorCode = 1;
+    optional string message = 2;
+}
+
+message SimpleGetCaptchaOutput {
+    optional string captchaKey = 1;
+    optional string captchaImageUrl = 2;
+}
+
+message SimpleRecoverPasswordArgs {
+    optional string gameId = 1;
+    optional string usernameOrEmail = 2;
+}
+
+message SimpleRecoverPasswordError {
+    optional int32 errorCode = 1;
+    optional string message = 2;
+}
+
+message SimpleRecoverPasswordOutput {
+}
+
+message SimpleRegisterArgs {
+    optional string gameId = 1;
+    optional string username = 2;
+    optional string password = 3;
+    optional string email = 4;
+    optional string captchaKey = 6;
+    optional string captchaValue = 7;
+    repeated KeyValuePair extraData = 5;
+    optional string partnerId = 8;
+    repeated string playerInsightSegments = 9;
+    optional string clientAPI = 10;
+    repeated KeyValuePair clientInfo = 11;
+}
+
+message SimpleRegisterError {
+    optional int32 errorCode = 1;
+    optional string message = 2;
+    optional string usernameError = 3;
+    optional string passwordError = 4;
+    optional string emailError = 5;
+    optional string captchaError = 6;
+}
+
+message SimpleRegisterOutput {
+    optional string token = 1;
+    optional string userId = 2;
+    optional bool showBranding = 3;
+    optional string gameFSRedirectMap = 4;
+    optional string partnerId = 5;
+    optional PlayerInsightState playerInsightState = 6;
+}
+
+message SteamConnectArgs {
+    optional string gameId = 1;
+    optional string steamAppId = 2;
+    optional string steamSessionTicket = 3;
+    repeated string playerInsightSegments = 4;
+    optional string clientAPI = 5;
+    repeated KeyValuePair clientInfo = 6;
+}
+
+message SteamConnectError {
+    optional int32 errorCode = 1;
+    optional string message = 2;
+}
+
+message SteamConnectOutput {
+    optional string token = 1;
+    optional string userId = 2;
+    optional bool showBranding = 3;
+    optional string gameFSRedirectMap = 4;
+    optional string partnerId = 5;
+    optional PlayerInsightState playerInsightState = 6;
+}
+
+message WriteErrorArgs {
+    optional string source = 1;
+    optional string error = 2;
+    optional string details = 3;
+    optional string stacktrace = 4;
+    repeated KeyValuePair extraData = 5;
+}
+
+message WriteErrorError {
+    optional int32 errorCode = 1;
+    optional string message = 2;
+}
+
+message WriteErrorOutput {
+}
+
